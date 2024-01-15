@@ -1,7 +1,8 @@
 import Link from "next/link";
 
-import { Button, buttonVariants } from "@/components/ui/button";
+import { buttonVariants } from "@/components/ui/button";
 import { Icons } from "@/components";
+import WindowControls from "./window-controls";
 
 export default function Header() {
     const accessibilityText = "Ir al inicio";
@@ -21,7 +22,7 @@ export default function Header() {
                 Sistema de Gestión de Productos
             </h1>
 
-            <Button disabled>Call to action</Button>
+            <WindowControls />
         </header>
     );
 }

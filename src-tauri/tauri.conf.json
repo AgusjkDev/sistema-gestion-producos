@@ -12,7 +12,11 @@
     },
     "tauri": {
         "allowlist": {
-            "all": false
+            "window": {
+                "all": false,
+                "minimize": true,
+                "close": true
+            }
         },
         "bundle": {
             "active": true,
@@ -39,9 +43,9 @@
         },
         "windows": [
             {
-                "fullscreen": false,
-                "maximized": true,
-                "resizable": true,
+                "decorations": false,
+                "resizable": false,
+                "fullscreen": true,
                 "title": "Sistema de Gestión de Productos"
             }
         ]
