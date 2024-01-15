@@ -14,7 +14,21 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <html lang="es" suppressHydrationWarning>
             <body>
                 <Providers>
-                    {children}
+                    <div className="flex h-dvh flex-col">
+                        <header>
+                            <p>Header</p>
+                        </header>
+
+                        <div className="flex flex-1 overflow-hidden">
+                            <div className="w-1/4 max-w-56 flex-shrink-0 overflow-y-auto">
+                                <p>Sidebar</p>
+                            </div>
+
+                            <div className="w-full overflow-y-auto">
+                                <div className="mx-auto w-[87.5%]">{children}</div>
+                            </div>
+                        </div>
+                    </div>
 
                     <div className="fixed bottom-6 right-6 z-[1]">
                         <ThemeButton />
