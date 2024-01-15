@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 
-import { Providers, ThemeButton } from "@/components";
+import { Providers, Header, ThemeButton } from "@/components";
 
 import "@/styles/globals.css";
 
@@ -15,9 +15,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             <body>
                 <Providers>
                     <div className="flex h-dvh flex-col">
-                        <header>
-                            <p>Header</p>
-                        </header>
+                        <Header />
 
                         <div className="flex flex-1 overflow-hidden">
                             <div className="w-1/4 max-w-56 flex-shrink-0 overflow-y-auto">
