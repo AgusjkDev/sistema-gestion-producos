@@ -19,12 +19,12 @@ export default function ThemeButton() {
         setTheme(theme === "dark" ? "light" : "dark");
     }
 
-    const accessibilityText = "Cambiar tema";
+    const tooltip = "Cambiar tema";
 
     return (
         <Button
-            aria-label={accessibilityText}
-            title={accessibilityText}
+            aria-label={tooltip}
+            tooltip={tooltip}
             variant="outline"
             size="icon"
             onClick={toggleTheme}
