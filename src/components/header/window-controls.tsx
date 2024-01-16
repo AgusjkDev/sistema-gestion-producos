@@ -7,19 +7,28 @@ export default function WindowControls() {
     const { minimize, close } = useWindowControls();
 
     return (
-        <div className="flex gap-x-6">
+        <div className="flex gap-x-4">
             <WithTooltip tooltip="Minimizar">
-                <button className="group" onClick={minimize}>
+                <button
+                    className="group grid aspect-square w-6 place-items-center rounded-md focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring"
+                    onClick={minimize}
+                >
                     <Icons.Minimize />
                 </button>
             </WithTooltip>
 
-            <button className="disabled:opacity-25" disabled>
+            <button
+                className="grid aspect-square w-6 place-items-center disabled:opacity-25"
+                disabled
+            >
                 <Icons.Maximize />
             </button>
 
             <WithTooltip tooltip="Cerrar">
-                <button className="group" onClick={close}>
+                <button
+                    className="group grid aspect-square w-6 place-items-center rounded-md focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring"
+                    onClick={close}
+                >
                     <Icons.Close />
                 </button>
             </WithTooltip>
