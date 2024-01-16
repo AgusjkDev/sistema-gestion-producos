@@ -38,7 +38,7 @@ const SIDEBAR_ANCHORS: ({ key: string; icon: IconElement } & React.ComponentProp
 
 export default function Sidebar() {
     return (
-        <aside className="flex w-1/4 max-w-56 flex-shrink-0 flex-col gap-y-3 overflow-y-auto border-r border-border p-5">
+        <aside className="flex h-full flex-col items-start gap-y-3 p-5">
             {SIDEBAR_ANCHORS.map(({ key, className, children, icon: Icon, ...props }) => (
                 <Link
                     key={key}

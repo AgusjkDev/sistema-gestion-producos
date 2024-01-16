@@ -1,13 +1,9 @@
-import type { Metadata } from "next";
+"use client";
 
+import { ResizablePanelGroup, ResizablePanel, ResizableHandle } from "@/components/ui/resizable";
 import { Providers, Header, Sidebar, ThemeButton } from "@/components";
 
 import "@/styles/globals.css";
-
-export const metadata: Metadata = {
-    title: "Sistema de Gestión de Productos",
-    description: "Sistema de Gestión de Productos",
-};
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
     return (
@@ -17,13 +13,17 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                     <div className="flex h-dvh flex-col">
                         <Header />
 
-                        <div className="flex flex-1 overflow-hidden">
-                            <Sidebar />
+                        <ResizablePanelGroup direction="horizontal">
+                            <ResizablePanel style={{ overflowY: "auto" }} defaultSize={17.5}>
+                                <Sidebar />
+                            </ResizablePanel>
 
-                            <div className="w-full overflow-y-auto">
-                                <div className="mx-auto w-[87.5%]">{children}</div>
-                            </div>
-                        </div>
+                            <ResizableHandle withHandle />
+
+                            <ResizablePanel style={{ overflowY: "auto" }} defaultSize={82.5}>
+                                {children}
+                            </ResizablePanel>
+                        </ResizablePanelGroup>
                     </div>
 
                     <div className="fixed bottom-6 right-6 z-[1]">
