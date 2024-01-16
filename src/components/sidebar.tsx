@@ -44,12 +44,14 @@ export default function Sidebar() {
                     key={key}
                     className={cn(
                         buttonVariants({ variant: "ghost" }),
-                        "grid grid-cols-[1fr,4fr] text-sm last:mt-auto",
+                        "flex w-full justify-start gap-x-2.5 text-sm last:mt-auto",
                         className,
                     )}
                     {...props}
                 >
-                    <Icon />
+                    <span className="flex-shrink-0">
+                        <Icon />
+                    </span>
 
                     {children}
                 </Link>
