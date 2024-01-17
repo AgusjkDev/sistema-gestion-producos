@@ -1,11 +1,23 @@
 "use client";
 
+import { usePathname } from "next/navigation";
+
 import { ResizablePanelGroup, ResizablePanel, ResizableHandle } from "@/components/ui/resizable";
+import { Separator } from "@/components/ui/separator";
 import { Providers, Header, Sidebar, ThemeButton } from "@/components";
 
 import "@/styles/globals.css";
 
+const PATHNAME_ENTRIES: Record<string, string> = {
+    "/categorias": "Categorías",
+    "/productos": "Productos",
+    "/stock": "Stock",
+    "/ajustes": "Ajustes",
+};
+
 export default function RootLayout({ children }: { children: React.ReactNode }) {
+    const pathname = usePathname();
+
     return (
         <html lang="es" suppressHydrationWarning>
             <body>
@@ -21,7 +33,15 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                             <ResizableHandle withHandle />
 
                             <ResizablePanel style={{ overflowY: "auto" }} defaultSize={82.5}>
-                                {children}
+                                <div className="mx-auto w-[87.5%] space-y-6 py-12">
+                                    <h2 className="font-mono text-xl font-bold capitalize">
+                                        {PATHNAME_ENTRIES[pathname]}
+                                    </h2>
+
+                                    <Separator />
+
+                                    {children}
+                                </div>
                             </ResizablePanel>
                         </ResizablePanelGroup>
                     </div>
