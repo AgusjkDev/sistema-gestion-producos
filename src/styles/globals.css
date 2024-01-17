@@ -74,3 +74,20 @@
         @apply bg-background text-foreground;
     }
 }
+
+@layer components {
+    .scrollbar {
+        scrollbar-width: thin;
+        scrollbar-color: hsl(var(--foreground)) transparent;
+        scroll-behavior: smooth;
+    }
+    .scrollbar::-webkit-scrollbar {
+        @apply w-3;
+    }
+    .scrollbar::-webkit-scrollbar-thumb {
+        @apply rounded-full border-4 border-solid border-transparent bg-foreground bg-clip-content;
+    }
+    .scrollbar::-webkit-scrollbar-track {
+        @apply bg-transparent;
+    }
+}

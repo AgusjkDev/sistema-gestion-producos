@@ -26,13 +26,21 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                         <Header />
 
                         <ResizablePanelGroup direction="horizontal">
-                            <ResizablePanel style={{ overflowY: "auto" }} defaultSize={17.5}>
+                            <ResizablePanel
+                                className="scrollbar"
+                                style={{ overflowY: "auto" }}
+                                defaultSize={17.5}
+                            >
                                 <Sidebar />
                             </ResizablePanel>
 
                             <ResizableHandle withHandle />
 
-                            <ResizablePanel style={{ overflowY: "auto" }} defaultSize={82.5}>
+                            <ResizablePanel
+                                className="scrollbar"
+                                style={{ overflowY: "auto" }}
+                                defaultSize={82.5}
+                            >
                                 <div className="mx-auto w-[87.5%] space-y-6 py-12">
                                     <h2 className="font-mono text-xl font-bold capitalize">
                                         {PATHNAME_ENTRIES[pathname]}
