@@ -4,6 +4,7 @@ import { usePathname } from "next/navigation";
 
 import { ResizablePanelGroup, ResizablePanel, ResizableHandle } from "@/components/ui/resizable";
 import { Separator } from "@/components/ui/separator";
+import { Toaster } from "@/components/ui/toaster";
 import { Providers, Header, Sidebar, ThemeButton } from "@/components";
 
 import "@/styles/globals.css";
@@ -57,6 +58,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                     <div className="fixed bottom-6 right-6 z-[1]">
                         <ThemeButton />
                     </div>
+
+                    <Toaster />
                 </Providers>
             </body>
         </html>
