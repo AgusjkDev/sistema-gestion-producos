@@ -25,7 +25,6 @@ const useCategories = create<CategoriesStore>()(
             categories: [],
             add: category => {
                 const categoryCode = toCode(category.name);
-
                 if (get().categories.find(({ code }) => code === categoryCode)) {
                     return { success: false, error: "¡Ya existe una categoría con ese nombre!" };
                 }
@@ -47,12 +46,13 @@ const useCategories = create<CategoriesStore>()(
             },
             update: category => {
                 let exists = false;
+                const categoryCode = toCode(category.name);
                 for (let { id, code } of get().categories) {
                     if (id === category.id) {
                         exists = true;
                         continue;
                     }
-                    if (code === category.code) {
+                    if (code === categoryCode) {
                         return {
                             success: false,
                             error: "¡Ya existe una categoría con ese nombre!",
@@ -70,7 +70,7 @@ const useCategories = create<CategoriesStore>()(
                             ? {
                                   ...rest,
                                   ...category,
-                                  code: toCode(category.name),
+                                  code: categoryCode,
                                   updatedAt: Date.now(),
                               }
                             : { id, ...rest },
