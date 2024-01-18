@@ -18,35 +18,20 @@ import { DialogFooter } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { toast } from "@/components/ui/use-toast";
 import { useCategories } from "@/stores";
-
-const createStreetSchema = z.object({
-    name: z
-        .string()
-        .transform(value => value.trim().replace(/\s+/g, " "))
-        .pipe(
-            z
-                .string()
-                .min(3, {
-                    message: "¡El nombre de la categoría debe contener por lo menos 3 caracteres!",
-                })
-                .max(32, { message: "¡El nombre de la categoría es demasiado extenso!" }),
-        ),
-});
-
-type CreateStreetSchema = z.infer<typeof createStreetSchema>;
+import { streetSchema } from "@/lib/schemas";
 
 interface CreationFormProps {
     close: () => void;
 }
 
 export default function CreationForm({ close }: CreationFormProps) {
-    const form = useForm<CreateStreetSchema>({
-        resolver: zodResolver(createStreetSchema),
+    const form = useForm<z.infer<typeof streetSchema>>({
+        resolver: zodResolver(streetSchema),
         defaultValues: { name: "" },
     });
     const { add } = useCategories();
 
-    function onSubmit(category: CreateStreetSchema) {
+    function onSubmit(category: z.infer<typeof streetSchema>) {
         const { success, error } = add(category);
         if (success) close();
 
