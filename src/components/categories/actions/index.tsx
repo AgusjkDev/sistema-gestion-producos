@@ -11,6 +11,8 @@ interface ActionsProps {
 }
 
 export default function Actions({ search, handleSearch }: ActionsProps) {
+    const tooltip = "Filtrar categorías";
+
     return (
         <section className="flex gap-x-2.5">
             <Input
@@ -23,7 +25,7 @@ export default function Actions({ search, handleSearch }: ActionsProps) {
 
             <CreationDialog />
 
-            <Button disabled tooltip="Filtrar categorías" variant="outline" size="icon">
+            <Button disabled aria-label={tooltip} tooltip={tooltip} variant="outline" size="icon">
                 <Icons.Filter />
             </Button>
         </section>

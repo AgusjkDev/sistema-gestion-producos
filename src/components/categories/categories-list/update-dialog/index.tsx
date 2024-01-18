@@ -22,10 +22,12 @@ interface UpdateDialogProps {
 export default function UpdateDialog({ category }: UpdateDialogProps) {
     const [open, setOpen] = React.useState<boolean>(false);
 
+    const tooltip = "Editar";
+
     return (
         <Dialog open={open} onOpenChange={setOpen}>
             <DialogTrigger asChild>
-                <Button tooltip="Editar" variant="outline" size="icon">
+                <Button aria-label={tooltip} tooltip={tooltip} variant="outline" size="icon">
                     <Icons.Edit />
                 </Button>
             </DialogTrigger>

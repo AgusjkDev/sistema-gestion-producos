@@ -11,11 +11,14 @@ interface InformationHoverCardProps {
 export default function InformationHoverCard({
     category: { createdAt, updatedAt },
 }: InformationHoverCardProps) {
+    const tooltip = "Información";
+
     return (
         <HoverCard openDelay={250} closeDelay={250}>
-            <WithTooltip tooltip="Información">
+            <WithTooltip tooltip={tooltip}>
                 <HoverCardTrigger asChild>
                     <span
+                        aria-label={tooltip}
                         tabIndex={0}
                         className={buttonVariants({ variant: "outline", size: "icon" })}
                     >

@@ -30,10 +30,12 @@ export default function DeleteDialog({ category }: DeleteDialogProps) {
         });
     }
 
+    const tooltip = "Eliminar";
+
     return (
         <AlertDialog>
             <AlertDialogTrigger asChild>
-                <Button tooltip="Eliminar" variant="outline" size="icon">
+                <Button aria-label={tooltip} tooltip={tooltip} variant="outline" size="icon">
                     <Icons.Trash />
                 </Button>
             </AlertDialogTrigger>

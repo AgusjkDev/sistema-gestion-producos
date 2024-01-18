@@ -6,10 +6,14 @@ import { useWindowControls } from "@/hooks";
 export default function WindowControls() {
     const { minimize, close } = useWindowControls();
 
+    const minimizeTooltip = "Minimizar";
+    const closeTooltip = "Cerrar";
+
     return (
         <div className="flex gap-x-4">
-            <WithTooltip tooltip="Minimizar">
+            <WithTooltip tooltip={minimizeTooltip}>
                 <button
+                    aria-label={minimizeTooltip}
                     className="group grid aspect-square w-6 place-items-center rounded-md focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring"
                     onClick={minimize}
                 >
@@ -24,8 +28,9 @@ export default function WindowControls() {
                 <Icons.Maximize />
             </button>
 
-            <WithTooltip tooltip="Cerrar">
+            <WithTooltip tooltip={closeTooltip}>
                 <button
+                    aria-label={closeTooltip}
                     className="group grid aspect-square w-6 place-items-center rounded-md focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring"
                     onClick={close}
                 >
