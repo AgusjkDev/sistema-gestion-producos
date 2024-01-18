@@ -5,10 +5,21 @@ import { Button } from "@/components/ui/button";
 import { Icons } from "@/components";
 import CreationDialog from "./creation-dialog";
 
-export default function Actions() {
+interface ActionsProps {
+    search: string;
+    handleSearch: (value: string) => void;
+}
+
+export default function Actions({ search, handleSearch }: ActionsProps) {
     return (
         <section className="flex gap-x-2.5">
-            <Input placeholder="Buscar categoría" className="w-auto" />
+            <Input
+                type="search"
+                placeholder="Buscar categoría"
+                className="w-auto"
+                value={search}
+                onChange={e => handleSearch(e.target.value)}
+            />
 
             <CreationDialog />
 

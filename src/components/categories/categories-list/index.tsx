@@ -3,14 +3,17 @@
 import { Skeleton } from "@/components/ui/skeleton";
 import { Card, CardHeader, CardTitle } from "@/components/ui/card";
 import { useMounted } from "@/hooks";
-import { useCategories } from "@/stores";
 import InformationHoverCard from "./information-hover-card";
 import UpdateDialog from "./update-dialog";
 import DeleteDialog from "./delete-dialog";
+import type { Category } from "@/stores";
 
-export default function CategoriesList() {
+interface CategoriesListProps {
+    categories: Category[];
+}
+
+export default function CategoriesList({ categories }: CategoriesListProps) {
     const mounted = useMounted();
-    const { categories } = useCategories();
 
     return (
         <section className="grid grid-cols-[repeat(auto-fit,minmax(250px,1fr))] gap-6">
