@@ -31,6 +31,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                                 className="scrollbar"
                                 style={{ overflowY: "auto" }}
                                 defaultSize={17.5}
+                                minSize={12}
                             >
                                 <Sidebar />
                             </ResizablePanel>
@@ -41,6 +42,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                                 className="scrollbar"
                                 style={{ overflowY: "auto" }}
                                 defaultSize={82.5}
+                                minSize={29.5}
                             >
                                 <div className="mx-auto w-[87.5%] space-y-6 py-12">
                                     <h2 className="font-mono text-xl font-bold capitalize">
