@@ -1,9 +1,11 @@
 import * as z from "zod";
 
+import { trimSpaces } from "./utils";
+
 export const streetSchema = z.object({
     name: z
         .string()
-        .transform(value => value.trim().replace(/\s+/g, " "))
+        .transform(trimSpaces)
         .pipe(
             z
                 .string()

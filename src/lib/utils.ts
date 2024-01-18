@@ -5,6 +5,10 @@ export function cn(...inputs: ClassValue[]) {
     return twMerge(clsx(inputs));
 }
 
+export function trimSpaces(value: string) {
+    return value.trim().replace(/\s+/g, " ");
+}
+
 export function generateId() {
     return Math.random().toString(36).slice(2);
 }
