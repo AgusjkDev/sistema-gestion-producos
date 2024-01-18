@@ -13,16 +13,16 @@ export default function InformationHoverCard({
 }: InformationHoverCardProps) {
     return (
         <HoverCard openDelay={250} closeDelay={250}>
-            <HoverCardTrigger>
-                <WithTooltip tooltip="Información">
+            <WithTooltip tooltip="Información">
+                <HoverCardTrigger asChild>
                     <span
                         tabIndex={0}
                         className={buttonVariants({ variant: "outline", size: "icon" })}
                     >
                         <Icons.Information />
                     </span>
-                </WithTooltip>
-            </HoverCardTrigger>
+                </HoverCardTrigger>
+            </WithTooltip>
 
             <HoverCardContent className="flex flex-col items-start gap-y-2">
                 <WithTooltip tooltip="Fecha de creación">
