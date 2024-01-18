@@ -11,7 +11,7 @@ export default function Actions({ category }: ActionsProps) {
         <div className="space-x-2">
             <UpdateDialog category={category} />
 
-            <DeleteDialog categoryId={category.id} />
+            <DeleteDialog category={category} />
         </div>
     );
 }

@@ -15,14 +15,14 @@ import { Icons, WithTooltip } from "@/components";
 import { useCategories, type Category } from "@/stores";
 
 interface DeleteDialogProps {
-    categoryId: Category["id"];
+    category: Category;
 }
 
-export default function DeleteDialog({ categoryId }: DeleteDialogProps) {
+export default function DeleteDialog({ category }: DeleteDialogProps) {
     const { remove } = useCategories();
 
     function removeCategory() {
-        const { success, error } = remove(categoryId);
+        const { success, error } = remove(category.id);
 
         toast({
             description: success ? "Categoría eliminada satisfactoriamente" : error,
