@@ -1,1 +1,1 @@
-export { default as useCategories } from "./categories";
+export { default as useCategories, type Category } from "./categories";

@@ -19,43 +19,47 @@ export default function CategoriesList() {
                 ? Array.from({ length: 8 }).map((_, i) => (
                       <Skeleton key={i} className="h-[68px] rounded-xl" />
                   ))
-                : categories.map(({ id, name, createdAt, updatedAt }) => (
-                      <article key={id}>
-                          <HoverCard>
-                              <HoverCardTrigger asChild>
-                                  <Card>
-                                      <CardHeader className="flex flex-row items-center justify-between space-y-0 p-4">
-                                          <CardTitle>{name}</CardTitle>
+                : categories.map(category => {
+                      const { id, name, createdAt, updatedAt } = category;
 
-                                          <Actions />
-                                      </CardHeader>
-                                  </Card>
-                              </HoverCardTrigger>
+                      return (
+                          <article key={id}>
+                              <HoverCard>
+                                  <HoverCardTrigger asChild>
+                                      <Card>
+                                          <CardHeader className="flex flex-row items-center justify-between space-y-0 p-4">
+                                              <CardTitle>{name}</CardTitle>
 
-                              <HoverCardContent className="space-y-2">
-                                  <WithTooltip tooltip="Fecha de creación">
-                                      <div className="inline-flex gap-x-1">
-                                          <Icons.CalendarPlus />
+                                              <Actions category={category} />
+                                          </CardHeader>
+                                      </Card>
+                                  </HoverCardTrigger>
 
-                                          <span className="text-sm text-muted-foreground">
-                                              {formatDate(createdAt)}
-                                          </span>
-                                      </div>
-                                  </WithTooltip>
+                                  <HoverCardContent className="space-y-2">
+                                      <WithTooltip tooltip="Fecha de creación">
+                                          <div className="inline-flex gap-x-1">
+                                              <Icons.CalendarPlus />
 
-                                  <WithTooltip tooltip="Última actualización">
-                                      <div className="inline-flex gap-x-1">
-                                          <Icons.CalendarEdit />
+                                              <span className="text-sm text-muted-foreground">
+                                                  {formatDate(createdAt)}
+                                              </span>
+                                          </div>
+                                      </WithTooltip>
 
-                                          <span className="text-sm text-muted-foreground">
-                                              {updatedAt ? formatDate(createdAt) : "Nunca"}
-                                          </span>
-                                      </div>
-                                  </WithTooltip>
-                              </HoverCardContent>
-                          </HoverCard>
-                      </article>
-                  ))}
+                                      <WithTooltip tooltip="Última actualización">
+                                          <div className="inline-flex gap-x-1">
+                                              <Icons.CalendarEdit />
+
+                                              <span className="text-sm text-muted-foreground">
+                                                  {updatedAt ? formatDate(createdAt) : "Nunca"}
+                                              </span>
+                                          </div>
+                                      </WithTooltip>
+                                  </HoverCardContent>
+                              </HoverCard>
+                          </article>
+                      );
+                  })}
         </section>
     );
 }

@@ -2,18 +2,19 @@ import { generateId } from "@/lib/utils";
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
 
-type Category = {
+export type Category = {
     id: string;
     name: string;
     createdAt: number;
     updatedAt: number | null;
 };
 
+type StoreReturnValue = { success: true; error: undefined } | { success: false; error: string };
+
 interface CategoriesStore {
     categories: Category[];
-    add: (
-        category: Pick<Category, "name">,
-    ) => { success: true; error: undefined } | { success: false; error: string };
+    add: (category: Pick<Category, "name">) => StoreReturnValue;
+    remove: (categoryId: Category["id"]) => StoreReturnValue;
 }
 
 const useCategories = create<CategoriesStore>()(
@@ -30,6 +31,18 @@ const useCategories = create<CategoriesStore>()(
                         ...state.categories,
                         { id: generateId(), createdAt: Date.now(), updatedAt: null, ...category },
                     ],
+                }));
+
+                return { success: true };
+            },
+            remove: categoryId => {
+                const exists = get().categories.some(({ id }) => id === categoryId);
+                if (!exists) {
+                    return { success: false, error: "¡Categoría inexistente!" };
+                }
+
+                set(state => ({
+                    categories: state.categories.filter(({ id }) => id !== categoryId),
                 }));
 
                 return { success: true };
