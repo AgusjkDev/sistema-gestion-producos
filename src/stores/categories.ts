@@ -1,7 +1,9 @@
+import { generateId } from "@/lib/utils";
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
 
 type Category = {
+    id: string;
     name: string;
     createdAt: number;
     updatedAt: number | null;
@@ -26,7 +28,7 @@ const useCategories = create<CategoriesStore>()(
                 set(state => ({
                     categories: [
                         ...state.categories,
-                        { ...category, createdAt: Date.now(), updatedAt: null },
+                        { id: generateId(), createdAt: Date.now(), updatedAt: null, ...category },
                     ],
                 }));
 

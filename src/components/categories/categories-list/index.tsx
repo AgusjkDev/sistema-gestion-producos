@@ -19,8 +19,8 @@ export default function CategoriesList() {
                 ? Array.from({ length: 8 }).map((_, i) => (
                       <Skeleton key={i} className="h-[68px] rounded-xl" />
                   ))
-                : categories.map(({ name, createdAt, updatedAt }) => (
-                      <article key={name}>
+                : categories.map(({ id, name, createdAt, updatedAt }) => (
+                      <article key={id}>
                           <HoverCard>
                               <HoverCardTrigger asChild>
                                   <Card>
