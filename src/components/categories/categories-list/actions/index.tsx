@@ -1,5 +1,4 @@
-import { Button } from "@/components/ui/button";
-import { Icons } from "@/components";
+import UpdateDialog from "./update-dialog";
 import DeleteDialog from "./delete-dialog";
 import type { Category } from "@/stores";
 
@@ -10,9 +9,7 @@ interface ActionsProps {
 export default function Actions({ category }: ActionsProps) {
     return (
         <div className="space-x-2">
-            <Button disabled tooltip="Editar" variant="outline" size="icon">
-                <Icons.Edit />
-            </Button>
+            <UpdateDialog category={category} />
 
             <DeleteDialog categoryId={category.id} />
         </div>

@@ -14,6 +14,7 @@ type StoreReturnValue = { success: true; error: undefined } | { success: false; 
 interface CategoriesStore {
     categories: Category[];
     add: (category: Pick<Category, "name">) => StoreReturnValue;
+    update: (category: Pick<Category, "id" | "name">) => StoreReturnValue;
     remove: (categoryId: Category["id"]) => StoreReturnValue;
 }
 
@@ -31,6 +32,35 @@ const useCategories = create<CategoriesStore>()(
                         ...state.categories,
                         { id: generateId(), createdAt: Date.now(), updatedAt: null, ...category },
                     ],
+                }));
+
+                return { success: true };
+            },
+            update: category => {
+                let exists = false;
+                for (let { id, name } of get().categories) {
+                    if (id === category.id) {
+                        exists = true;
+                        continue;
+                    }
+                    if (name === category.name) {
+                        return {
+                            success: false,
+                            error: "¡Ya existe una categoría con ese nombre!",
+                        };
+                    }
+                }
+
+                if (!exists) {
+                    return { success: false, error: "¡Categoría inexistente!" };
+                }
+
+                set(state => ({
+                    categories: state.categories.map(({ id, ...rest }) =>
+                        id === category.id
+                            ? { ...rest, ...category, updatedAt: Date.now() }
+                            : { id, ...rest },
+                    ),
                 }));
 
                 return { success: true };
