@@ -7,7 +7,8 @@ import { Icons, WithTooltip } from "@/components";
 import { useMounted } from "@/hooks";
 import { useCategories } from "@/stores";
 import { formatDate } from "@/lib/utils";
-import Actions from "./actions";
+import UpdateDialog from "./update-dialog";
+import DeleteDialog from "./delete-dialog";
 
 export default function CategoriesList() {
     const mounted = useMounted();
@@ -30,7 +31,11 @@ export default function CategoriesList() {
                                           <CardHeader className="flex flex-row items-center justify-between space-y-0 p-4">
                                               <CardTitle>{name}</CardTitle>
 
-                                              <Actions category={category} />
+                                              <div className="space-x-2">
+                                                  <UpdateDialog category={category} />
+
+                                                  <DeleteDialog category={category} />
+                                              </div>
                                           </CardHeader>
                                       </Card>
                                   </HoverCardTrigger>
