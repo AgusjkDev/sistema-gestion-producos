@@ -30,7 +30,7 @@ export default function UpdateDialog({ category }: UpdateDialogProps) {
                 </Button>
             </DialogTrigger>
 
-            <DialogContent>
+            <DialogContent onCloseAutoFocus={e => e.preventDefault()}>
                 <DialogHeader>
                     <DialogTitle>Edición de categoría</DialogTitle>
 

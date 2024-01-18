@@ -24,7 +24,7 @@ export default function CategoriesList() {
 
                       return (
                           <article key={id}>
-                              <HoverCard>
+                              <HoverCard openDelay={250} closeDelay={0}>
                                   <HoverCardTrigger asChild>
                                       <Card>
                                           <CardHeader className="flex flex-row items-center justify-between space-y-0 p-4">

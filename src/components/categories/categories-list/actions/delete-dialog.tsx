@@ -38,7 +38,7 @@ export default function DeleteDialog({ categoryId }: DeleteDialogProps) {
                 </Button>
             </AlertDialogTrigger>
 
-            <AlertDialogContent>
+            <AlertDialogContent onCloseAutoFocus={e => e.preventDefault()}>
                 <AlertDialogHeader>
                     <AlertDialogTitle>
                         &#191;Deseas realmente eliminar esta categoría&#63;

@@ -22,7 +22,7 @@ export default function CreationDialog() {
                 <Button tooltip="Crear categoría">Crear categoría</Button>
             </DialogTrigger>
 
-            <DialogContent>
+            <DialogContent onCloseAutoFocus={e => e.preventDefault()}>
                 <DialogHeader>
                     <DialogTitle>Creación de categoría</DialogTitle>
 
