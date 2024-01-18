@@ -39,11 +39,7 @@ export default function UpdateDialog({ category }: UpdateDialogProps) {
                     </DialogDescription>
                 </DialogHeader>
 
-                <UpdateForm
-                    categoryId={category.id}
-                    defaultValues={category}
-                    close={() => setOpen(false)}
-                />
+                <UpdateForm category={category} close={() => setOpen(false)} />
             </DialogContent>
         </Dialog>
     );

@@ -21,20 +21,19 @@ import { useCategories, type Category } from "@/stores";
 import { streetSchema } from "@/lib/schemas";
 
 interface UpdateFormProps {
-    categoryId: Category["id"];
-    defaultValues: z.infer<typeof streetSchema>;
+    category: Category;
     close: () => void;
 }
 
-export default function UpdateForm({ categoryId, defaultValues, close }: UpdateFormProps) {
+export default function UpdateForm({ category, close }: UpdateFormProps) {
     const form = useForm<z.infer<typeof streetSchema>>({
         resolver: zodResolver(streetSchema),
-        defaultValues,
+        defaultValues: category,
     });
     const { update } = useCategories();
 
-    function onSubmit(category: z.infer<typeof streetSchema>) {
-        const { success, error } = update({ id: categoryId, ...category });
+    function onSubmit(updatedCategory: z.infer<typeof streetSchema>) {
+        const { success, error } = update({ ...category, ...updatedCategory });
         if (success) close();
 
         toast({
@@ -58,7 +57,7 @@ export default function UpdateForm({ categoryId, defaultValues, close }: UpdateF
                             <FormLabel>Nombre</FormLabel>
 
                             <FormControl>
-                                <Input placeholder={defaultValues.name} {...field} />
+                                <Input placeholder={category.name} {...field} />
                             </FormControl>
 
                             <FormDescription>Nombre de la categoría</FormDescription>
