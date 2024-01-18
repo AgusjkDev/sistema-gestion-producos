@@ -27,7 +27,7 @@ export default function CategoriesList() {
                                   <CardHeader className="flex flex-row items-center justify-between space-y-0 p-4">
                                       <CardTitle>{name}</CardTitle>
 
-                                      <div className="space-x-2">
+                                      <div className="flex gap-x-2">
                                           <InformationHoverCard category={category} />
 
                                           <UpdateDialog category={category} />
