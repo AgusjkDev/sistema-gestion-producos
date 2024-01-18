@@ -1,9 +1,10 @@
-import { generateId } from "@/lib/utils";
+import { generateId, toCode } from "@/lib/utils";
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
 
 export type Category = {
     id: string;
+    code: string;
     name: string;
     createdAt: number;
     updatedAt: number | null;
@@ -14,7 +15,7 @@ type StoreReturnValue = { success: true; error: undefined } | { success: false; 
 interface CategoriesStore {
     categories: Category[];
     add: (category: Pick<Category, "name">) => StoreReturnValue;
-    update: (category: Pick<Category, "id" | "name">) => StoreReturnValue;
+    update: (category: Pick<Category, "id" | "code" | "name">) => StoreReturnValue;
     remove: (categoryId: Category["id"]) => StoreReturnValue;
 }
 
@@ -23,14 +24,22 @@ const useCategories = create<CategoriesStore>()(
         (set, get) => ({
             categories: [],
             add: category => {
-                if (get().categories.find(({ name }) => name === category.name)) {
+                const categoryCode = toCode(category.name);
+
+                if (get().categories.find(({ code }) => code === categoryCode)) {
                     return { success: false, error: "¡Ya existe una categoría con ese nombre!" };
                 }
 
                 set(state => ({
                     categories: [
                         ...state.categories,
-                        { id: generateId(), createdAt: Date.now(), updatedAt: null, ...category },
+                        {
+                            id: generateId(),
+                            code: categoryCode,
+                            createdAt: Date.now(),
+                            updatedAt: null,
+                            ...category,
+                        },
                     ],
                 }));
 
@@ -38,12 +47,12 @@ const useCategories = create<CategoriesStore>()(
             },
             update: category => {
                 let exists = false;
-                for (let { id, name } of get().categories) {
+                for (let { id, code } of get().categories) {
                     if (id === category.id) {
                         exists = true;
                         continue;
                     }
-                    if (name === category.name) {
+                    if (code === category.code) {
                         return {
                             success: false,
                             error: "¡Ya existe una categoría con ese nombre!",
@@ -58,7 +67,12 @@ const useCategories = create<CategoriesStore>()(
                 set(state => ({
                     categories: state.categories.map(({ id, ...rest }) =>
                         id === category.id
-                            ? { ...rest, ...category, updatedAt: Date.now() }
+                            ? {
+                                  ...rest,
+                                  ...category,
+                                  code: toCode(category.name),
+                                  updatedAt: Date.now(),
+                              }
                             : { id, ...rest },
                     ),
                 }));
