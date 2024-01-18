@@ -5,7 +5,7 @@ import { trimSpaces } from "./utils";
 export const streetSchema = z.object({
     name: z
         .string()
-        .transform(trimSpaces)
+        .transform(value => trimSpaces(value))
         .pipe(
             z
                 .string()
