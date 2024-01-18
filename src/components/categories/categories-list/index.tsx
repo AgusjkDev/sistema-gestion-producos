@@ -51,7 +51,7 @@ export default function CategoriesList() {
                                               <Icons.CalendarEdit />
 
                                               <span className="text-sm text-muted-foreground">
-                                                  {updatedAt ? formatDate(createdAt) : "Nunca"}
+                                                  {updatedAt ? formatDate(updatedAt) : "Nunca"}
                                               </span>
                                           </div>
                                       </WithTooltip>
