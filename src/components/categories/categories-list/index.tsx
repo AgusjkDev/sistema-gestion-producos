@@ -16,7 +16,7 @@ export default function CategoriesList({ categories }: CategoriesListProps) {
     const mounted = useMounted();
 
     return (
-        <section className="grid grid-cols-[repeat(auto-fit,minmax(250px,1fr))] gap-6">
+        <section className="flex flex-wrap gap-6">
             {!mounted
                 ? Array.from({ length: 8 }).map((_, i) => (
                       <Skeleton key={i} className="h-[68px] rounded-xl" />
@@ -25,7 +25,7 @@ export default function CategoriesList({ categories }: CategoriesListProps) {
                       const { id, name } = category;
 
                       return (
-                          <article key={id}>
+                          <article key={id} className="w-full max-w-xs">
                               <Card>
                                   <CardHeader className="flex flex-row items-center justify-between space-y-0 p-4">
                                       <CardTitle>{name}</CardTitle>
