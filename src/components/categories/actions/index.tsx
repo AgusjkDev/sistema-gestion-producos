@@ -1,18 +1,18 @@
 "use client";
 
 import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
-import { Icons } from "@/components";
 import CreationDialog from "./creation-dialog";
+import FiltersDialog from "./filters-dialog";
+import type { CategoryFiltersSchema } from "@/lib/schemas";
 
 interface ActionsProps {
     search: string;
     handleSearch: (value: string) => void;
+    filters: CategoryFiltersSchema;
+    handleFilters: (filters: CategoryFiltersSchema) => void;
 }
 
-export default function Actions({ search, handleSearch }: ActionsProps) {
-    const tooltip = "Filtrar categorías";
-
+export default function Actions({ search, handleSearch, filters, handleFilters }: ActionsProps) {
     return (
         <section className="flex gap-x-2.5">
             <Input
@@ -25,9 +25,7 @@ export default function Actions({ search, handleSearch }: ActionsProps) {
 
             <CreationDialog />
 
-            <Button disabled aria-label={tooltip} tooltip={tooltip} variant="outline" size="icon">
-                <Icons.Filter />
-            </Button>
+            <FiltersDialog filters={filters} handleFilters={handleFilters} />
         </section>
     );
 }
