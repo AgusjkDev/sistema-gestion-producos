@@ -1,7 +1,6 @@
 "use client";
 
 import { useForm } from "react-hook-form";
-import * as z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 
 import {
@@ -18,20 +17,20 @@ import { DialogFooter } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { toast } from "@/components/ui/use-toast";
 import { useCategories } from "@/stores";
-import { categorySchema } from "@/lib/schemas";
+import { categorySchema, type CategorySchema } from "@/lib/schemas";
 
 interface CreationFormProps {
     close: () => void;
 }
 
 export default function CreationForm({ close }: CreationFormProps) {
-    const form = useForm<z.infer<typeof categorySchema>>({
+    const form = useForm<CategorySchema>({
         resolver: zodResolver(categorySchema),
         defaultValues: { name: "" },
     });
     const { add } = useCategories();
 
-    function onSubmit(category: z.infer<typeof categorySchema>) {
+    function onSubmit(category: CategorySchema) {
         const { success, error } = add(category);
         if (success) close();
 

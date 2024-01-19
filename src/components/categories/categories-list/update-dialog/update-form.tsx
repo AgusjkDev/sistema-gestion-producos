@@ -1,7 +1,6 @@
 "use client";
 
 import { useForm } from "react-hook-form";
-import * as z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 
 import {
@@ -18,7 +17,7 @@ import { DialogFooter } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { toast } from "@/components/ui/use-toast";
 import { useCategories, type Category } from "@/stores";
-import { categorySchema } from "@/lib/schemas";
+import { categorySchema, type CategorySchema } from "@/lib/schemas";
 
 interface UpdateFormProps {
     category: Category;
@@ -26,13 +25,13 @@ interface UpdateFormProps {
 }
 
 export default function UpdateForm({ category, close }: UpdateFormProps) {
-    const form = useForm<z.infer<typeof categorySchema>>({
+    const form = useForm<CategorySchema>({
         resolver: zodResolver(categorySchema),
         defaultValues: category,
     });
     const { update } = useCategories();
 
-    function onSubmit(updatedCategory: z.infer<typeof categorySchema>) {
+    function onSubmit(updatedCategory: CategorySchema) {
         const { success, error } = update({ ...category, ...updatedCategory });
         if (success) close();
 

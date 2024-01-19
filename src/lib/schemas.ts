@@ -15,3 +15,4 @@ export const categorySchema = z.object({
                 .max(32, { message: "¡El nombre de la categoría es demasiado extenso!" }),
         ),
 });
+export type CategorySchema = z.infer<typeof categorySchema>;
