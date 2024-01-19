@@ -18,7 +18,7 @@ import { DialogFooter } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { toast } from "@/components/ui/use-toast";
 import { useCategories, type Category } from "@/stores";
-import { streetSchema } from "@/lib/schemas";
+import { categorySchema } from "@/lib/schemas";
 
 interface UpdateFormProps {
     category: Category;
@@ -26,13 +26,13 @@ interface UpdateFormProps {
 }
 
 export default function UpdateForm({ category, close }: UpdateFormProps) {
-    const form = useForm<z.infer<typeof streetSchema>>({
-        resolver: zodResolver(streetSchema),
+    const form = useForm<z.infer<typeof categorySchema>>({
+        resolver: zodResolver(categorySchema),
         defaultValues: category,
     });
     const { update } = useCategories();
 
-    function onSubmit(updatedCategory: z.infer<typeof streetSchema>) {
+    function onSubmit(updatedCategory: z.infer<typeof categorySchema>) {
         const { success, error } = update({ ...category, ...updatedCategory });
         if (success) close();
 

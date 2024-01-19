@@ -2,7 +2,7 @@ import * as z from "zod";
 
 import { trimSpaces } from "./utils";
 
-export const streetSchema = z.object({
+export const categorySchema = z.object({
     name: z
         .string()
         .transform(value => trimSpaces(value))

@@ -18,20 +18,20 @@ import { DialogFooter } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { toast } from "@/components/ui/use-toast";
 import { useCategories } from "@/stores";
-import { streetSchema } from "@/lib/schemas";
+import { categorySchema } from "@/lib/schemas";
 
 interface CreationFormProps {
     close: () => void;
 }
 
 export default function CreationForm({ close }: CreationFormProps) {
-    const form = useForm<z.infer<typeof streetSchema>>({
-        resolver: zodResolver(streetSchema),
+    const form = useForm<z.infer<typeof categorySchema>>({
+        resolver: zodResolver(categorySchema),
         defaultValues: { name: "" },
     });
     const { add } = useCategories();
 
-    function onSubmit(category: z.infer<typeof streetSchema>) {
+    function onSubmit(category: z.infer<typeof categorySchema>) {
         const { success, error } = add(category);
         if (success) close();
 
