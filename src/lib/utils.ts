@@ -22,12 +22,35 @@ export function generateId() {
     return Math.random().toString(36).slice(2);
 }
 
-export function formatDate(timestamp: number) {
-    return new Intl.DateTimeFormat("es-AR", {
-        year: "numeric",
-        month: "long",
-        day: "numeric",
-        hour: "2-digit",
-        minute: "2-digit",
-    }).format(timestamp);
+export function formatDate(timestamp: number, size: "small" | "medium" | "large" = "large") {
+    let options: Intl.DateTimeFormatOptions;
+
+    switch (size) {
+        case "small":
+            options = {
+                year: "numeric",
+                month: "2-digit",
+                day: "2-digit",
+            };
+            break;
+        case "medium": {
+            options = {
+                year: "numeric",
+                month: "long",
+                day: "numeric",
+            };
+            break;
+        }
+        case "large":
+            options = {
+                year: "numeric",
+                month: "long",
+                day: "numeric",
+                hour: "2-digit",
+                minute: "2-digit",
+            };
+            break;
+    }
+
+    return new Intl.DateTimeFormat("es-AR", options).format(timestamp);
 }
