@@ -20,7 +20,7 @@ export default function CategoriesList({ categories }: CategoriesListProps) {
         <section className="flex flex-wrap gap-6">
             {!mounted
                 ? Array.from({ length: 8 }).map((_, i) => (
-                      <Skeleton key={i} className="h-[68px] rounded-xl" />
+                      <Skeleton key={i} className="h-[68px] w-full max-w-xs rounded-xl" />
                   ))
                 : categories.map(category => {
                       const { id, name } = category;
