@@ -16,6 +16,21 @@ export default function useCategoriesFilter() {
     });
     const { categories } = useCategories();
 
+    const sortingFunctions: Record<
+        CategoryFiltersSchema["criterion"],
+        (a: Category, b: Category) => number
+    > = {
+        name: (a, b) =>
+            filters.order === "ASC" ? a.name.localeCompare(b.name) : b.name.localeCompare(a.name),
+        createdAt: (a, b) =>
+            filters.order === "ASC" ? a.createdAt - b.createdAt : b.createdAt - a.createdAt,
+        updatedAt: (a, b) =>
+            filters.order === "ASC"
+                ? (a.updatedAt ?? 0) - (b.updatedAt ?? 0) || a.createdAt - b.createdAt
+                : (b.updatedAt ?? 0) - (a.updatedAt ?? 0) || b.createdAt - a.createdAt,
+        use: () => 0, // Not implemented
+    };
+
     function handleSearch(value: string) {
         setSearch(value);
 
@@ -28,12 +43,20 @@ export default function useCategoriesFilter() {
     }
 
     React.useEffect(() => {
-        // TODO: Use filters
+        const filteredByQuery = categories.filter(({ code, createdAt, updatedAt }) => {
+            if (query && !code.startsWith(query)) return false;
 
-        if (!query) return setFilteredCategories(categories);
+            if (!filters.dateRange) return true;
 
-        setFilteredCategories(categories.filter(({ code }) => code.startsWith(query)));
-    }, [categories, query]);
+            const { from = -Infinity, to = Infinity } = filters.dateRange;
+
+            const dateToCheck = filters.criterion === "updatedAt" ? updatedAt ?? 0 : createdAt;
+
+            return dateToCheck >= from && dateToCheck <= to;
+        });
+
+        setFilteredCategories(filteredByQuery.toSorted(sortingFunctions[filters.criterion]));
+    }, [categories, query, filters]);
 
     return {
         search,
