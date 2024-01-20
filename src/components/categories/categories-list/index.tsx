@@ -2,6 +2,7 @@
 
 import { Skeleton } from "@/components/ui/skeleton";
 import { Card, CardHeader, CardTitle } from "@/components/ui/card";
+import { WithTooltip } from "@/components";
 import { useMounted } from "@/hooks";
 import InformationHoverCard from "./information-hover-card";
 import UpdateDialog from "./update-dialog";
@@ -28,7 +29,9 @@ export default function CategoriesList({ categories }: CategoriesListProps) {
                           <article key={id} className="w-full max-w-xs">
                               <Card>
                                   <CardHeader className="flex flex-row items-center justify-between space-y-0 p-4">
-                                      <CardTitle>{name}</CardTitle>
+                                      <WithTooltip tooltip={name}>
+                                          <CardTitle className="truncate">{name}</CardTitle>
+                                      </WithTooltip>
 
                                       <div className="flex gap-x-2">
                                           <InformationHoverCard category={category} />
