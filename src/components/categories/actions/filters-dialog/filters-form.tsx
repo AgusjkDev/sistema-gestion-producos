@@ -184,7 +184,7 @@ export default function FiltersForm({ filters, handleFilters, close }: FiltersFo
                                             onSelect={dateRange => {
                                                 field.onChange({
                                                     from: dateRange?.from?.getTime(),
-                                                    to: dateRange?.to?.getTime(),
+                                                    to: dateRange?.to?.setHours(24, 0, 0, -1),
                                                 });
                                             }}
                                         />
