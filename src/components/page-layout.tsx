@@ -17,6 +17,8 @@ const PATHNAME_ENTRIES: Record<string, string> = {
 export default function PageLayout({ children }: React.PropsWithChildren) {
     const pathname = usePathname();
 
+    const pageTitle = PATHNAME_ENTRIES[pathname];
+
     return (
         <div className="flex h-dvh flex-col">
             <Header />
@@ -40,11 +42,15 @@ export default function PageLayout({ children }: React.PropsWithChildren) {
                     minSize={32.5}
                 >
                     <div className="mx-auto w-[87.5%] space-y-6 py-12">
-                        <h2 className="font-mono text-xl font-bold capitalize">
-                            {PATHNAME_ENTRIES[pathname]}
-                        </h2>
+                        {pageTitle && (
+                            <>
+                                <h2 className="font-mono text-xl font-bold capitalize">
+                                    {PATHNAME_ENTRIES[pathname]}
+                                </h2>
 
-                        <Separator />
+                                <Separator />
+                            </>
+                        )}
 
                         {children}
                     </div>
